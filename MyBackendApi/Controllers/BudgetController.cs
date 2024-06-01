@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using BudgetApi.Services;
+using BudgetApi.Models;
+using System.Reflection.Metadata.Ecma335;
 
 namespace MyBackendApi.Controllers;
 
@@ -20,7 +23,7 @@ public class BudgetController : ControllerBase
     public ActionResult<IEnumerable<BudgetEntry>> GetBudget2024()
     {
         var budgetEntries = _csvService.GetBudgetEntries("uploads/budget.csv");
-        var filteredEntries = budgetEntries.FindAll(entry => entry.Year == "2024");
+        var filteredEntries = budgetEntries.Select(entry => entry.Amount2024).ToList();
         return Ok(filteredEntries);
     }
 
@@ -28,7 +31,7 @@ public class BudgetController : ControllerBase
     public ActionResult<IEnumerable<BudgetEntry>> GetBudget2023()
     {
         var budgetEntries = _csvService.GetBudgetEntries("uploads/budget.csv");
-        var filteredEntries = budgetEntries.FindAll(entry => entry.Year == "2023");
+        var filteredEntries = budgetEntries.Select(entry => entry.Amount2023).ToList();
         return Ok(filteredEntries);
     }
 
