@@ -22,23 +22,68 @@ public class BudgetController : ControllerBase
     [HttpGet("2024")]
     public ActionResult<IEnumerable<BudgetEntry>> GetBudget2024()
     {
-        var budgetEntries = _csvService.GetBudgetEntries("uploads/budget.csv");
-        var filteredEntries = budgetEntries.Select(entry => entry.Amount2024).ToList();
+        var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
+        var filteredEntries = budgetEntries.Select(entry => entry.BVA_2023).ToList();
         return Ok(filteredEntries);
     }
 
     [HttpGet("2023")]
     public ActionResult<IEnumerable<BudgetEntry>> GetBudget2023()
     {
-        var budgetEntries = _csvService.GetBudgetEntries("uploads/budget.csv");
-        var filteredEntries = budgetEntries.Select(entry => entry.Amount2023).ToList();
+        var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
+        var filteredEntries = budgetEntries.Select(entry => entry.BVA_2023).ToList();
         return Ok(filteredEntries);
     }
 
     [HttpGet("all")]
     public ActionResult<IEnumerable<BudgetEntry>> GetAllBudgetEntries()
     {
-        var budgetEntries = _csvService.GetBudgetEntries("uploads/budget.csv");
+        var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
         return Ok(budgetEntries);
     }
+    [HttpGet("groupedByKonto")]
+        public ActionResult<IEnumerable<object>> GetBudgetGroupedByKonto()
+        {
+            var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
+            var groupedEntries = budgetEntries.GroupBy(entry => entry.TEXT_KONTO)
+                                              .Select(group => new
+                                              {
+                                                  Konto = group.Key,
+                                                  Amount2023 = group.Sum(entry => entry.BVA_2023),
+                                                  Amount2024 = group.Sum(entry => entry.BVA_2024)
+                                              })
+                                              .ToList();
+            return Ok(groupedEntries);
+        }
+
+        [HttpGet("groupedByVASTELLE")]
+        public ActionResult<IEnumerable<object>> GetBudgetGroupedByVASTELLE()
+        {
+            var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
+            var groupedEntries = budgetEntries.GroupBy(entry => entry.TEXT_VASTELLE)
+                                              .Select(group => new
+                                              {
+                                                  Category = group.Key,
+                                                  Amount2023 = group.Sum(entry => entry.BVA_2023),
+                                                  Amount2024 = group.Sum(entry => entry.BVA_2024)
+                                              })
+                                              .ToList();
+            return Ok(groupedEntries);
+        }
+
+        [HttpGet("comparison")]
+        public ActionResult<IEnumerable<object>> GetBudgetComparison()
+        {
+            var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
+            var comparison = budgetEntries.GroupBy(entry => entry.TEXT_KONTO)
+                                          .Select(group => new
+                                          {
+                                              Category = group.Key,
+                                              Amount2023 = group.Sum(entry => entry.BVA_2023),
+                                              Amount2024 = group.Sum(entry => entry.BVA_2024),
+                                              Difference = group.Sum(entry => entry.BVA_2024) - group.Sum(entry => entry.BVA_2023)
+                                          })
+                                          .ToList();
+            return Ok(comparison);
+        }
 }
