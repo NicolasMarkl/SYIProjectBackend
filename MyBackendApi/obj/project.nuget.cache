@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "qgWzWYvwDXnzPhtzf/V44pWRJi9v7Ots4B4nQrpcnZKFJhWB0JkUnnzArzqkj8DWGIoWYqZTWjwTJMW5JHPCyw==",
+  "dgSpecHash": "mx1vx98K1c74eX8bL78huQ9itaN7YAoaTiR1sb90vyX6Mg07wEDFmj5hJ8XJWlxKfHUgZuWN6NAVtS4SDjrdMg==",
   "success": true,
-  "projectFilePath": "E:\\FH Repo\\SYIProjectBackend\\MyBackendApi\\MyBackendApi.csproj",
+  "projectFilePath": "C:\\repo\\SYIProjectBackend\\MyBackendApi\\MyBackendApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Nicolas\\.nuget\\packages\\csvhelper\\32.0.3\\csvhelper.32.0.3.nupkg.sha512",
     "C:\\Users\\Nicolas\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.2\\microsoft.aspnetcore.openapi.7.0.2.nupkg.sha512",
     "C:\\Users\\Nicolas\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\Nicolas\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
