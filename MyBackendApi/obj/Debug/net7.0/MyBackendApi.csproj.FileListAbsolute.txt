@@ -1,0 +1,8 @@
+E:\FH Repo\SYIProjectBackend\MyBackendApi\obj\Debug\net7.0\MyBackendApi.csproj.AssemblyReference.cache
+E:\FH Repo\SYIProjectBackend\MyBackendApi\obj\Debug\net7.0\MyBackendApi.GeneratedMSBuildEditorConfig.editorconfig
+E:\FH Repo\SYIProjectBackend\MyBackendApi\obj\Debug\net7.0\MyBackendApi.AssemblyInfoInputs.cache
+E:\FH Repo\SYIProjectBackend\MyBackendApi\obj\Debug\net7.0\MyBackendApi.AssemblyInfo.cs
+E:\FH Repo\SYIProjectBackend\MyBackendApi\obj\Debug\net7.0\MyBackendApi.csproj.CoreCompileInputs.cache
+E:\FH Repo\SYIProjectBackend\MyBackendApi\obj\Debug\net7.0\MyBackendApi.MvcApplicationPartsAssemblyInfo.cs
+E:\FH Repo\SYIProjectBackend\MyBackendApi\obj\Debug\net7.0\MyBackendApi.MvcApplicationPartsAssemblyInfo.cache
+E:\FH Repo\SYIProjectBackend\MyBackendApi\obj\Debug\net7.0\MyBackendApi.sourcelink.json
