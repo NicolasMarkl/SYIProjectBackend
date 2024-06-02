@@ -19,21 +19,28 @@ public class BudgetController : ControllerBase
         _csvService = csvService;
     }
 
-    [HttpGet("2024")]
-    public ActionResult<IEnumerable<BudgetEntry>> GetBudget2024()
+    [HttpGet("total/{year}")]
+    public ActionResult<decimal> GetBudgetTotal(int year)
     {
         var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
-        var filteredEntries = budgetEntries.Select(entry => entry.BVA_2023).ToList();
-        return Ok(filteredEntries);
+        decimal totalBudgetValue = 0;
+
+        if (year == 2023)
+        {
+            totalBudgetValue = budgetEntries.Sum(entry => entry.BVA_2023);
+        }
+        else if (year == 2024)
+        {
+            totalBudgetValue = budgetEntries.Sum(entry => entry.BVA_2024);
+        }
+        else
+        {
+            return BadRequest("Year not supported. Only 2023 and 2024 are supported.");
+        }
+
+        return Ok(totalBudgetValue);
     }
 
-    [HttpGet("2023")]
-    public ActionResult<IEnumerable<BudgetEntry>> GetBudget2023()
-    {
-        var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
-        var filteredEntries = budgetEntries.Select(entry => entry.BVA_2023).ToList();
-        return Ok(filteredEntries);
-    }
 
     [HttpGet("all")]
     public ActionResult<IEnumerable<BudgetEntry>> GetAllBudgetEntries()
@@ -41,49 +48,94 @@ public class BudgetController : ControllerBase
         var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
         return Ok(budgetEntries);
     }
-    [HttpGet("groupedByKonto")]
-        public ActionResult<IEnumerable<object>> GetBudgetGroupedByKonto()
+    [HttpGet("groupedByKonto/{year}")]
+    public ActionResult<IEnumerable<object>> GetBudgetGroupedByKonto(int year)
+    {
+        if (year != 2023 && year != 2024)
         {
-            var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
-            var groupedEntries = budgetEntries.GroupBy(entry => entry.TEXT_KONTO)
-                                              .Select(group => new
-                                              {
-                                                  Konto = group.Key,
-                                                  Amount2023 = group.Sum(entry => entry.BVA_2023),
-                                                  Amount2024 = group.Sum(entry => entry.BVA_2024)
-                                              })
-                                              .ToList();
-            return Ok(groupedEntries);
+            return BadRequest("Invalid year. Only 2023 and 2024 are supported.");
         }
 
-        [HttpGet("groupedByVASTELLE")]
-        public ActionResult<IEnumerable<object>> GetBudgetGroupedByVASTELLE()
+        var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
+        var groupedEntries = budgetEntries.GroupBy(entry => entry.TEXT_KONTO)
+                                          .Select(group => new
+                                          {
+                                              Konto = group.Key,
+                                              Amount = year == 2023
+                                                       ? group.Sum(entry => entry.BVA_2023)
+                                                       : group.Sum(entry => entry.BVA_2024)
+                                          })
+                                          .ToList();
+        return Ok(groupedEntries);
+    }
+
+    [HttpGet("groupedByVASTELLE/{year}")]
+    public ActionResult<IEnumerable<object>> GetBudgetGroupedByVASTELLE(int year)
+    {
+        if (year != 2023 && year != 2024)
         {
-            var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
-            var groupedEntries = budgetEntries.GroupBy(entry => entry.TEXT_VASTELLE)
-                                              .Select(group => new
-                                              {
-                                                  Category = group.Key,
-                                                  Amount2023 = group.Sum(entry => entry.BVA_2023),
-                                                  Amount2024 = group.Sum(entry => entry.BVA_2024)
-                                              })
-                                              .ToList();
-            return Ok(groupedEntries);
+            return BadRequest("Invalid year. Only 2023 and 2024 are supported.");
         }
 
-        [HttpGet("comparison")]
-        public ActionResult<IEnumerable<object>> GetBudgetComparison()
-        {
-            var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
-            var comparison = budgetEntries.GroupBy(entry => entry.TEXT_KONTO)
+        var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
+        var groupedEntries = budgetEntries.GroupBy(entry => entry.TEXT_VASTELLE)
                                           .Select(group => new
                                           {
                                               Category = group.Key,
-                                              Amount2023 = group.Sum(entry => entry.BVA_2023),
-                                              Amount2024 = group.Sum(entry => entry.BVA_2024),
-                                              Difference = group.Sum(entry => entry.BVA_2024) - group.Sum(entry => entry.BVA_2023)
+                                              Amount = year == 2023
+                                                       ? group.Sum(entry => entry.BVA_2023)
+                                                       : group.Sum(entry => entry.BVA_2024)
                                           })
                                           .ToList();
-            return Ok(comparison);
-        }
+        return Ok(groupedEntries);
+    }
+
+
+
+    [HttpGet("comparison")]
+    public ActionResult<IEnumerable<object>> GetBudgetComparison()
+    {
+        var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
+        var comparison = budgetEntries.GroupBy(entry => entry.TEXT_KONTO)
+                                      .Select(group => new
+                                      {
+                                          Category = group.Key,
+                                          Amount2023 = group.Sum(entry => entry.BVA_2023),
+                                          Amount2024 = group.Sum(entry => entry.BVA_2024),
+                                          Difference = group.Sum(entry => entry.BVA_2024) - group.Sum(entry => entry.BVA_2023)
+                                      })
+                                      .ToList();
+        return Ok(comparison);
+    }
+
+    [HttpGet("top10Increase")]
+    public ActionResult<IEnumerable<object>> GetTop10BudgetIncrease()
+    {
+        var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
+        var topIncreases = budgetEntries.Select(entry => new
+        {
+            entry.TEXT_KONTO,
+            Increase = entry.BVA_2024 - entry.BVA_2023
+        })
+                                        .OrderByDescending(entry => entry.Increase)
+                                        .Take(10)
+                                        .ToList();
+        return Ok(topIncreases);
+    }
+
+    [HttpGet("top10Decrease")]
+    public ActionResult<IEnumerable<object>> GetTop10BudgetDecrease()
+    {
+        var budgetEntries = _csvService.GetBudgetEntries("data/budget.csv");
+        var topDecreases = budgetEntries.Select(entry => new
+        {
+            entry.TEXT_KONTO,
+            Decrease = entry.BVA_2023 - entry.BVA_2024
+        })
+                                        .OrderByDescending(entry => entry.Decrease)
+                                        .Take(10)
+                                        .ToList();
+        return Ok(topDecreases);
+    }
+
 }
