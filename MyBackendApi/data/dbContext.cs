@@ -23,4 +23,15 @@ public class ApplicationDbContext : DbContext
             SaveChanges();
         }
     }
+
+    public void ClearAndSeed()
+    {
+        Budgets.RemoveRange(Budgets);
+        SaveChanges();
+
+        Budgets.AddRange(
+            _csvService.GetBudgetEntries("data/budget.csv")
+        );
+        SaveChanges();
+    }
 }

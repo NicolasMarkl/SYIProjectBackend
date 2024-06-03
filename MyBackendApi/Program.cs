@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<CsvService>();
+builder.Services.AddScoped<IBudgetRepository, BudgetRepository>(); 
 
 // Configure EF Core with SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -35,7 +36,7 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     dbContext.Database.Migrate();
-    dbContext.Seed();
+    //dbContext.ClearAndSeed();
 }
 
 app.Run();
