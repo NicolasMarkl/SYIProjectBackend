@@ -2,7 +2,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BudgetApi.Models;
 
-public interface IBudgetRepository
+namespace BudgetApi.Repositories
 {
-    Task<IEnumerable<BudgetEntry>> GetAllBudgetsAsync();
+    public interface IBudgetRepository
+    {
+        Task<IEnumerable<BudgetEntry>> GetAllBudgetsAsync();
+    }
 }

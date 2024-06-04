@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BudgetApi.Models;
 
+namespace BudgetApi.Repositories {
+
 public class BudgetRepository : IBudgetRepository
 {
     private readonly ApplicationDbContext _context;
@@ -16,4 +18,6 @@ public class BudgetRepository : IBudgetRepository
     {
         return await _context.Budgets.ToListAsync();
     }
+}
+
 }
