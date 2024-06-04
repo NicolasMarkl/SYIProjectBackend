@@ -16,7 +16,7 @@ public class BudgetRepository : IBudgetRepository
 
     public async Task<IEnumerable<BudgetEntry>> GetAllBudgetsAsync()
     {
-        return await _context.Budgets.ToListAsync();
+        return await _context.Budgets.Where(x=> x.DB2 == 0 && x.HH == 1 && x.EV_FV=="EV").ToListAsync();
     }
 }
 
