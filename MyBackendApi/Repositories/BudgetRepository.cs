@@ -14,9 +14,9 @@ public class BudgetRepository : IBudgetRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<BudgetEntry>> GetAllBudgetsAsync()
+    public async Task<IEnumerable<BudgetSummaryEntry>> GetAllBudgetsAsync()
     {
-        return await _context.Budgets.Where(x=> x.DB2 == 0 && x.HH == 1 && x.EV_FV=="EV").ToListAsync();
+        return await _context.Budgets.ToListAsync();
     }
 }
 

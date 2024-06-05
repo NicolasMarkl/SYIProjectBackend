@@ -4,7 +4,7 @@ using BudgetApi.Services;
 
 public class ApplicationDbContext : DbContext
 {
-    public DbSet<BudgetEntry> Budgets { get; set; }
+    public DbSet<BudgetSummaryEntry> Budgets { get; set; }
     private readonly CsvService _csvService;
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, CsvService csvService)

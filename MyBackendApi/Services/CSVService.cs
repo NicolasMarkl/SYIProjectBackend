@@ -9,7 +9,7 @@ namespace BudgetApi.Services
 {
     public class CsvService
     {
-        public List<BudgetEntry> GetBudgetEntries(string filePath)
+        public List<BudgetSummaryEntry> GetBudgetEntries(string filePath)
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -18,7 +18,7 @@ namespace BudgetApi.Services
                 MissingFieldFound = null
             };
 
-            var budgetEntries = new List<BudgetEntry>();
+            var budgetEntries = new List<BudgetSummaryEntry>();
             using (var reader = new StreamReader(filePath))
             using (var csv = new CsvReader(reader, config))
             {
@@ -26,11 +26,11 @@ namespace BudgetApi.Services
                 csv.ReadHeader();
                 while (csv.Read())
                 {
-                    var entry = new BudgetEntry
+                    /*var entry = new BudgetSummaryEntry
                     {
 
                         TEXT_KONTO = csv.GetField<string>("TEXT_KONTO"),
-                        EV_FV = csv.GetField<string>("EV_FV"),
+                        EV_FV = csv.GetField<string>("EV/FV"),
                         JAHR = csv.GetField<int>("JAHR"),
                         UG = csv.GetField<int>("UG"),
                         GB = csv.GetField<int>("GB"),
@@ -45,7 +45,16 @@ namespace BudgetApi.Services
                         Erfolg_2022 = csv.GetField<decimal?>("Erfolg 2022")
 
                     };
-                    budgetEntries.Add(entry);
+                    budgetEntries.Add(entry);*/
+
+                    var entry = new BudgetSummaryEntry
+                    {
+                        Konto = csv.GetField<string>("Konto"),
+                        Kategorie = csv.GetField<string>("Kategorie"),
+                        Unterkategorie = csv.GetField<string>("Unterkategorie"),
+                        Budget2023 = csv.GetField<decimal>("2023"),
+                        Budget2024 = csv.GetField<decimal>("2024")
+                    };
                 }
             }
             return budgetEntries;

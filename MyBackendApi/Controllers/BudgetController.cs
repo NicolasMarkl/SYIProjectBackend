@@ -28,11 +28,11 @@ namespace MyBackendApi.Controllers
 
             if (year == 2023)
             {
-                totalBudgetValue = budgetEntries.Sum(entry => entry.BVA_2023);
+                totalBudgetValue = budgetEntries.Sum(entry => entry.Budget2023);
             }
             else if (year == 2024)
             {
-                totalBudgetValue = budgetEntries.Sum(entry => entry.BVA_2024);
+                totalBudgetValue = budgetEntries.Sum(entry => entry.Budget2024);
             }
             else
             {
@@ -43,7 +43,7 @@ namespace MyBackendApi.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<ActionResult<IEnumerable<BudgetEntry>>> GetAllBudgetEntries()
+        public async Task<ActionResult<IEnumerable<BudgetSummaryEntry>>> GetAllBudgetEntries()
         {
             var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
             return Ok(budgetEntries);
@@ -58,13 +58,13 @@ namespace MyBackendApi.Controllers
             }
 
             var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
-            var groupedEntries = budgetEntries.GroupBy(entry => entry.TEXT_KONTO)
+            var groupedEntries = budgetEntries.GroupBy(entry => entry.Konto)
                                               .Select(group => new
                                               {
                                                   Konto = group.Key,
                                                   Amount = year == 2023
-                                                           ? group.Sum(entry => entry.BVA_2023)
-                                                           : group.Sum(entry => entry.BVA_2024)
+                                                           ? group.Sum(entry => entry.Budget2023)
+                                                           : group.Sum(entry => entry.Budget2024)
                                               })
                                               .ToList();
             return Ok(groupedEntries);
@@ -79,13 +79,13 @@ namespace MyBackendApi.Controllers
             }
 
             var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
-            var groupedEntries = budgetEntries.GroupBy(entry => entry.TEXT_VASTELLE)
+            var groupedEntries = budgetEntries.GroupBy(entry => entry.Kategorie)
                                               .Select(group => new
                                               {
                                                   Category = group.Key,
                                                   Amount = year == 2023
-                                                           ? group.Sum(entry => entry.BVA_2023)
-                                                           : group.Sum(entry => entry.BVA_2024)
+                                                           ? group.Sum(entry => entry.Budget2023)
+                                                           : group.Sum(entry => entry.Budget2024)
                                               })
                                               .ToList();
             return Ok(groupedEntries);
@@ -95,13 +95,13 @@ namespace MyBackendApi.Controllers
         public async Task<ActionResult<IEnumerable<object>>> GetBudgetComparison()
         {
             var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
-            var comparison = budgetEntries.GroupBy(entry => entry.TEXT_KONTO)
+            var comparison = budgetEntries.GroupBy(entry => entry.Konto)
                                           .Select(group => new
                                           {
                                               Category = group.Key,
-                                              Amount2023 = group.Sum(entry => entry.BVA_2023),
-                                              Amount2024 = group.Sum(entry => entry.BVA_2024),
-                                              Difference = group.Sum(entry => entry.BVA_2024) - group.Sum(entry => entry.BVA_2023)
+                                              Amount2023 = group.Sum(entry => entry.Budget2023),
+                                              Amount2024 = group.Sum(entry => entry.Budget2024),
+                                              Difference = group.Sum(entry => entry.Budget2024) - group.Sum(entry => entry.Budget2023)
                                           })
                                           .ToList();
             return Ok(comparison);
@@ -113,8 +113,8 @@ namespace MyBackendApi.Controllers
             var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
             var topIncreases = budgetEntries.Select(entry => new
             {
-                entry.TEXT_KONTO,
-                Increase = entry.BVA_2024 - entry.BVA_2023
+                entry.Konto,
+                Increase = entry.Budget2024 - entry.Budget2023
             })
                                             .OrderByDescending(entry => entry.Increase)
                                             .Take(10)
@@ -128,8 +128,8 @@ namespace MyBackendApi.Controllers
             var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
             var topDecreases = budgetEntries.Select(entry => new
             {
-                entry.TEXT_KONTO,
-                Decrease = entry.BVA_2023 - entry.BVA_2024
+                entry.Konto,
+                Decrease = entry.Budget2023 - entry.Budget2024
             })
                                             .OrderByDescending(entry => entry.Decrease)
                                             .Take(10)
