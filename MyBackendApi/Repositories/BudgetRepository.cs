@@ -14,9 +14,9 @@ public class BudgetRepository : IBudgetRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<BudgetSummaryEntry>> GetAllBudgetsAsync()
+    public async Task<IEnumerable<BudgetSummaryEntry>> GetAllPayoutBudgetsAsync()
     {
-        return await _context.Budgets.ToListAsync();
+        return await _context.Budgets.Where(x=>!x.IstEinzahlung).ToListAsync();
     }
 }
 

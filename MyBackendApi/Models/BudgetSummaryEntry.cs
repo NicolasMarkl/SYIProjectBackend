@@ -3,7 +3,7 @@ namespace BudgetApi.Models
     public class BudgetSummaryEntry
     {
         public int ID { get; set; }
-        public bool IsEinnahme { get; set; }
+        public bool IstEinzahlung { get; set; }
         public string? Konto { get; set; }
         public string? Kategorie { get; set; }
         public string? Unterkategorie { get; set; }

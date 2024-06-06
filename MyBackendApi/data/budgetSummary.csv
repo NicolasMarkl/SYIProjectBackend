@@ -1,62 +1,53 @@
 IstEinzahlung,Kategorie,Unterkategorie,2024,2023
-Nettofinanzierungssaldo,,,-20900000000,-19228000000
-0,Grundsatzeinigung FAG ab 2024,3300000000,3036000000
-0,Entlastung für Haushalte,4900000000,4508000000
-0,Wirtschaftsstandort,100000000,92000000
-0,Wissenschaft, F&E,5600000000,5152000000
-0,Klima und Transformation,1100000000,1012000000
-0,Sicherheit,6000000000,5520000000
-0,Zinsen (UG 58),6000000000,5520000000
-0,Pensionen,23400000000,21528000000
-1,UG 16 Öffentliche Abgaben Brutto,105200000000,96784000000
-1,UG 16 Ab-Überweisungen,-42900000000,-39468000000
-1,UG 20 Arbeit,8600000000,7912000000
-1,UG 25 Familie und Jugend,7900000000,7268000000
-0,Nettofinanzierungssaldo,,,-17100000000
-0,Grundsatzeinigung FAG ab 2024,3400000000,3500000000
-0,Entlastung für Haushalte,2700000000,1000000000
-0,Wirtschaftsstandort,1000000000,2300000000
-0,Wissenschaft, F&E,6200000000,6600000000
-0,Klima und Transformation,2700000000,3200000000
-0,Sicherheit,7000000000,8100000000
-0,Zinsen (UG 58),8700000000,9200000000
-0,Pensionen,25500000000,29500000000
-1,UG 16 Öffentliche Abgaben Brutto,109100000000,115600000000
-1,UG 16 Ab-Überweisungen,-43200000000,-45100000000
-1,UG 20 Arbeit,8600000000,9400000000
-1,UG 25 Familie und Jugend,8200000000,8900000000
-0,Recht und Sicherheit,Präsidentschaftskanzlei,13100000,12004000
-0,Recht und Sicherheit,Bundesgesetzgebung,296400000,272688000
-0,Recht und Sicherheit,Verfassungsgerichtshof,19700000,18124000
-0,Recht und Sicherheit,Verwaltungsgerichtshof,26500000,24380000
-0,Recht und Sicherheit,Volksanwaltschaft,15400000,14168000
-0,Recht und Sicherheit,Rechnungshof,46700000,42964000
-0,Recht und Sicherheit,Bundeskanzleramt,775400000,713368000
-0,Recht und Sicherheit,Inneres,4054700000,3728884000
-0,Recht und Sicherheit,Äußeres,677200000,622224000
-0,Recht und Sicherheit,Justiz,2397900000,2206008000
-0,Recht und Sicherheit,Militärische Angelegenheiten,4015000000,3693800000
-0,Recht und Sicherheit,Finanzverwaltung,2021300000,1859596000
-0,Recht und Sicherheit,Öffentliche Abgaben,0,0
-0,Recht und Sicherheit,Öffentlicher Dienst und Sport,348000000,320160000
-0,Recht und Sicherheit,Fremdenwesen,788100000,724052000
-0,Arbeit, Soziales, Gesundheit und Familie,Arbeit,9469600000,8712032000
-0,Arbeit, Soziales, Gesundheit und Familie,Soziales und Konsumentenschutz,5884000000,5413280000
-0,Arbeit, Soziales, Gesundheit und Familie,Pensionsversicherung,16658000000,15325440000
-0,Arbeit, Soziales, Gesundheit und Familie,Pensionen - Beamtinnen und Beamte,12807700000,11783116000
-0,Arbeit, Soziales, Gesundheit und Familie,Gesundheit,3249300000,2981356000
-0,Arbeit, Soziales, Gesundheit und Familie,Familie und Jugend,8841700000,8134384000
-0,Bildung, Forschung, Kunst und Kultur,Bildung,11517600000,10595568000
-0,Bildung, Forschung, Kunst und Kultur,Wissenschaft und Forschung,6417700000,5904284000
-0,Bildung, Forschung, Kunst und Kultur,Kunst und Kultur,668800000,615296000
-0,Bildung, Forschung, Kunst und Kultur,Wirtschaft (Forschung),263900000,242788000
-0,Bildung, Forschung, Kunst und Kultur,Innovation u. Technologie (Forschung),652700000,600484000
-0,Wirtschaft, Infrastruktur und Umwelt,Wirtschaft,3250600000,2990552000
-0,Wirtschaft, Infrastruktur und Umwelt,Mobilität,5917100000,5443722000
-0,Wirtschaft, Infrastruktur und Umwelt,Land- u. Forstwirtsch., Reg. u. Wasserwirtsch.,3074400000,2828448000
-0,Wirtschaft, Infrastruktur und Umwelt,Klima, Umwelt und Energie,3834000000,3527280000
-0,Wirtschaft, Infrastruktur und Umwelt,Finanzausgleich,3694100000,3398622000
-0,Wirtschaft, Infrastruktur und Umwelt,Bundesvermögen,2635100000,2424286000
-0,Wirtschaft, Infrastruktur und Umwelt,Finanzmarktstabilität,3700000,3404000
-0,Kassa und Zinsen,Kassenverwaltung,0,0
-0,Kassa und Zinsen,Finanzierungen, Währungstauschverträge,9152900000,8410668000
+0,Nettofinanzierungssaldo,, -20900000000, -19228000000
+0,Grundsatzeinigung FAG ab 2024,, 6700000000, 6254160000
+0,Entlastung für Haushalte,, 7600000000, 6791464000
+0,Wirtschaftsstandort,, 1100000000, 1018000000
+0,Wissenschaft, F&E, 11800000000, 11048000000
+0,Klima und Transformation,, 3800000000, 3496000000
+0,Sicherheit,, 13000000000, 11960000000
+0,Zinsen (UG 58),, 14700000000, 13524000000
+0,Pensionen,, 48900000000, 44988000000
+0,Recht und Sicherheit,Präsidentschaftskanzlei, 13100000, 12434000
+0,Recht und Sicherheit,Bundesgesetzgebung, 296400000, 272688000
+0,Recht und Sicherheit,Verfassungsgerichtshof, 19700000, 18124000
+0,Recht und Sicherheit,Verwaltungsgerichtshof, 26500000, 24380000
+0,Recht und Sicherheit,Volksanwaltschaft, 15400000, 14168000
+0,Recht und Sicherheit,Rechnungshof, 46700000, 42964000
+0,Recht und Sicherheit,Bundeskanzleramt, 775400000, 713368000
+0,Recht und Sicherheit,Inneres, 4054700000, 3728884000
+0,Recht und Sicherheit,Äußeres, 677200000, 622224000
+0,Recht und Sicherheit,Justiz, 2397900000, 2206008000
+0,Recht und Sicherheit,Militärische Angelegenheiten, 4015000000, 3693800000
+0,Recht und Sicherheit,Finanzverwaltung, 2021300000, 1859596000
+0,Recht und Sicherheit,Öffentliche Abgaben, 0, 0
+0,Recht und Sicherheit,Öffentlicher Dienst und Sport, 348000000, 320160000
+0,Recht und Sicherheit,Fremdenwesen, 788100000, 724052000
+0,Gesundheit und Familie,Arbeit, 9469600000, 8712032000
+0,Gesundheit und Familie,Soziales und Konsumentenschutz, 5884000000, 5413280000
+0,Gesundheit und Familie,Pensionsversicherung, 16658000000, 15325440000
+0,Gesundheit und Familie,Pensionen - Beamtinnen und Beamte, 12807700000, 11783116000
+0,Gesundheit und Familie,Gesundheit, 3249300000, 2981356000
+0,Gesundheit und Familie,Familie und Jugend, 8841700000, 8134384000
+0,Forschung,Kunst und Kultur, 11517600000, 10595568000
+0,Forschung,Wissenschaft und Forschung, 6417700000, 5904284000
+0,Forschung,Kunst und Kultur,668800000, 615296000
+0,Forschung,Wirtschaft (Forschung), 263900000, 242788000
+0,Forschung,Innovation u. Technologie (Forschung), 652700000, 600484000
+0,Infrastruktur und Umwelt,Wirtschaft, 3250600000, 2990552000
+0,Infrastruktur und Umwelt,Mobilität, 5917100000, 5443722000
+0,Land- u. Forstwirtschaft, Reg. u. Wasserwirtschaft, 3074400000, 2828448000
+0,Klima, Umwelt und Energie, 3834000000, 3527280000
+0,Infrastruktur und Umwelt,Finanzausgleich, 3694100000, 3398622000
+0,Infrastruktur und Umwelt,Bundesvermögen, 2635100000, 2424286000
+0,Infrastruktur und Umwelt,Finanzmarktstabilität, 3700000, 3404000
+0,Kassa und Zinsen,Kassenverwaltung, 0, 0
+0,Finanzierungen, Währungstauschverträge, 9152900000, 8410668000
+1,Umsatzsteuer,,40100000000,36836000000
+1,Lohnsteuer,, 35300000000, 32468000000
+1,Körperschaftsteuer,, 12500000000, 11040000000
+1,Kapitalertragsteuer,, 5600000000, 5240000000
+1,Einkommensteuer,, 5000000000, 4600000000
+1,Mineralölsteuer,, 4000000000, 3680000000
+1,Motorbezogene Versicherungssteuer,, 2800000000, 2584000000
+1,Sonstige Abgaben,, 10300000000, 9200000000

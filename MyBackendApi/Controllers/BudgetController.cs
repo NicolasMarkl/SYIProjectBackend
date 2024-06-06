@@ -23,7 +23,7 @@ namespace MyBackendApi.Controllers
         [HttpGet("total/{year}")]
         public async Task<ActionResult<decimal>> GetBudgetTotal(int year)
         {
-            var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
+            var budgetEntries = await _budgetRepository.GetAllPayoutBudgetsAsync();
             decimal totalBudgetValue = 0;
 
             if (year == 2023)
@@ -45,23 +45,23 @@ namespace MyBackendApi.Controllers
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<BudgetSummaryEntry>>> GetAllBudgetEntries()
         {
-            var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
+            var budgetEntries = await _budgetRepository.GetAllPayoutBudgetsAsync();
             return Ok(budgetEntries);
         }
 
-        [HttpGet("groupedByKonto/{year}")]
-        public async Task<ActionResult<IEnumerable<object>>> GetBudgetGroupedByKonto(int year)
+        [HttpGet("groupedByKategorie/{year}")]
+        public async Task<ActionResult<IEnumerable<object>>> GetBudgetGroupedByKategorie(int year)
         {
             if (year != 2023 && year != 2024)
             {
                 return BadRequest("Invalid year. Only 2023 and 2024 are supported.");
             }
 
-            var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
-            var groupedEntries = budgetEntries.GroupBy(entry => entry.Konto)
+            var budgetEntries = await _budgetRepository.GetAllPayoutBudgetsAsync();
+            var groupedEntries = budgetEntries.GroupBy(entry => entry.Kategorie)
                                               .Select(group => new
                                               {
-                                                  Konto = group.Key,
+                                                  Category = group.Key,
                                                   Amount = year == 2023
                                                            ? group.Sum(entry => entry.Budget2023)
                                                            : group.Sum(entry => entry.Budget2024)
@@ -70,16 +70,16 @@ namespace MyBackendApi.Controllers
             return Ok(groupedEntries);
         }
 
-        [HttpGet("groupedByVASTELLE/{year}")]
-        public async Task<ActionResult<IEnumerable<object>>> GetBudgetGroupedByVASTELLE(int year)
+        [HttpGet("groupedByUnterkategorie/{year}")]
+        public async Task<ActionResult<IEnumerable<object>>> GetBudgetGroupedByUnterkategorie(int year)
         {
             if (year != 2023 && year != 2024)
             {
                 return BadRequest("Invalid year. Only 2023 and 2024 are supported.");
             }
 
-            var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
-            var groupedEntries = budgetEntries.GroupBy(entry => entry.Kategorie)
+            var budgetEntries = await _budgetRepository.GetAllPayoutBudgetsAsync();
+            var groupedEntries = budgetEntries.GroupBy(entry => entry.Unterkategorie)
                                               .Select(group => new
                                               {
                                                   Category = group.Key,
@@ -94,8 +94,8 @@ namespace MyBackendApi.Controllers
         [HttpGet("comparison")]
         public async Task<ActionResult<IEnumerable<object>>> GetBudgetComparison()
         {
-            var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
-            var comparison = budgetEntries.GroupBy(entry => entry.Konto)
+            var budgetEntries = await _budgetRepository.GetAllPayoutBudgetsAsync();
+            var comparison = budgetEntries.GroupBy(entry => entry.Kategorie)
                                           .Select(group => new
                                           {
                                               Category = group.Key,
@@ -110,10 +110,10 @@ namespace MyBackendApi.Controllers
         [HttpGet("top10Increase")]
         public async Task<ActionResult<IEnumerable<object>>> GetTop10BudgetIncrease()
         {
-            var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
+            var budgetEntries = await _budgetRepository.GetAllPayoutBudgetsAsync();
             var topIncreases = budgetEntries.Select(entry => new
             {
-                entry.Konto,
+                entry.Kategorie,
                 Increase = entry.Budget2024 - entry.Budget2023
             })
                                             .OrderByDescending(entry => entry.Increase)
@@ -125,10 +125,10 @@ namespace MyBackendApi.Controllers
         [HttpGet("top10Decrease")]
         public async Task<ActionResult<IEnumerable<object>>> GetTop10BudgetDecrease()
         {
-            var budgetEntries = await _budgetRepository.GetAllBudgetsAsync();
+            var budgetEntries = await _budgetRepository.GetAllPayoutBudgetsAsync();
             var topDecreases = budgetEntries.Select(entry => new
             {
-                entry.Konto,
+                entry.Kategorie,
                 Decrease = entry.Budget2023 - entry.Budget2024
             })
                                             .OrderByDescending(entry => entry.Decrease)

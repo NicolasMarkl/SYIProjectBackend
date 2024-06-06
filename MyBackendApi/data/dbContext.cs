@@ -18,7 +18,7 @@ public class ApplicationDbContext : DbContext
         if (!Budgets.Any())
         {
             Budgets.AddRange(
-                _csvService.GetBudgetEntries("data/budget.csv")
+                _csvService.GetBudgetEntries("data/budgetSummary.csv")
             );
             SaveChanges();
         }
@@ -30,7 +30,7 @@ public class ApplicationDbContext : DbContext
         SaveChanges();
 
         Budgets.AddRange(
-            _csvService.GetBudgetEntries("data/budget.csv")
+            _csvService.GetBudgetEntries("data/budgetSummary.csv")
         );
         SaveChanges();
     }
