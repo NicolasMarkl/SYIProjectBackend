@@ -18,6 +18,11 @@ public class BudgetRepository : IBudgetRepository
     {
         return await _context.Budgets.Where(x=>!x.IstEinzahlung).ToListAsync();
     }
+
+    public async Task<IEnumerable<BudgetSummaryEntry>> GetAllRevenueBudgetsAsync()
+    {
+        return await _context.Budgets.Where(x=>x.IstEinzahlung).ToListAsync();
+    }
 }
 
 }

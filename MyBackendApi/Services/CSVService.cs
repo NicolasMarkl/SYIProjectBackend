@@ -13,7 +13,7 @@ namespace BudgetApi.Services
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                Delimiter = ",",
+                Delimiter = ";",
                 HasHeaderRecord = true,
                 MissingFieldFound = null
             };

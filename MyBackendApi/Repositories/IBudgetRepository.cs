@@ -7,5 +7,6 @@ namespace BudgetApi.Repositories
     public interface IBudgetRepository
     {
         Task<IEnumerable<BudgetSummaryEntry>> GetAllPayoutBudgetsAsync();
+        Task<IEnumerable<BudgetSummaryEntry>> GetAllRevenueBudgetsAsync();
     }
 }

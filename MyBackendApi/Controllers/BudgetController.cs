@@ -79,7 +79,7 @@ namespace MyBackendApi.Controllers
             }
 
             var budgetEntries = await _budgetRepository.GetAllPayoutBudgetsAsync();
-            var groupedEntries = budgetEntries.GroupBy(entry => entry.Unterkategorie)
+            var groupedEntries = budgetEntries.Where(x=>x.Unterkategorie != null  && x.Unterkategorie != "").GroupBy(entry => entry.Unterkategorie)
                                               .Select(group => new
                                               {
                                                   Category = group.Key,
@@ -135,6 +135,27 @@ namespace MyBackendApi.Controllers
                                             .Take(10)
                                             .ToList();
             return Ok(topDecreases);
+        }
+
+        [HttpGet("revenueGroupedByKategorie/{year}")]
+        public async Task<ActionResult<IEnumerable<object>>> GetRevenueGroupedByKategorie(int year)
+        {
+            if (year != 2023 && year != 2024)
+            {
+                return BadRequest("Invalid year. Only 2023 and 2024 are supported.");
+            }
+
+            var budgetEntries = await _budgetRepository.GetAllRevenueBudgetsAsync();
+            var groupedEntries = budgetEntries.GroupBy(entry => entry.Kategorie)
+                                              .Select(group => new
+                                              {
+                                                  Category = group.Key,
+                                                  Amount = year == 2023
+                                                           ? group.Sum(entry => entry.Budget2023)
+                                                           : group.Sum(entry => entry.Budget2024)
+                                              })
+                                              .ToList();
+            return Ok(groupedEntries);
         }
     }
 }
