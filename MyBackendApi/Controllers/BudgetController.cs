@@ -79,7 +79,7 @@ namespace MyBackendApi.Controllers
             }
 
             var budgetEntries = await _budgetRepository.GetAllPayoutBudgetsAsync();
-            var groupedEntries = budgetEntries.Where(x=>x.Unterkategorie != null  && x.Unterkategorie != "").GroupBy(entry => entry.Unterkategorie)
+            var groupedEntries = budgetEntries.Where(x => x.Unterkategorie != null && x.Unterkategorie != "").GroupBy(entry => entry.Unterkategorie)
                                               .Select(group => new
                                               {
                                                   Category = group.Key,
@@ -111,14 +111,17 @@ namespace MyBackendApi.Controllers
         public async Task<ActionResult<IEnumerable<object>>> GetTop10BudgetIncrease()
         {
             var budgetEntries = await _budgetRepository.GetAllPayoutBudgetsAsync();
-            var topIncreases = budgetEntries.Select(entry => new
-            {
-                entry.Kategorie,
-                Increase = entry.Budget2024 - entry.Budget2023
-            })
-                                            .OrderByDescending(entry => entry.Increase)
-                                            .Take(10)
-                                            .ToList();
+            var topIncreases = budgetEntries
+                .Where(entry => entry.Budget2023 > 0) // Avoid division by zero
+                .Select(entry => new
+                {
+                    entry.Kategorie,
+                    entry.Unterkategorie,
+                    IncreaseInPercent = entry.Budget2023 == 0 ? 0 : (entry.Budget2024 - entry.Budget2023) / entry.Budget2023 * 100
+                })
+                .OrderByDescending(entry => entry.IncreaseInPercent)
+                .Take(10)
+                .ToList();
             return Ok(topIncreases);
         }
 
@@ -126,14 +129,17 @@ namespace MyBackendApi.Controllers
         public async Task<ActionResult<IEnumerable<object>>> GetTop10BudgetDecrease()
         {
             var budgetEntries = await _budgetRepository.GetAllPayoutBudgetsAsync();
-            var topDecreases = budgetEntries.Select(entry => new
-            {
-                entry.Kategorie,
-                Decrease = entry.Budget2023 - entry.Budget2024
-            })
-                                            .OrderByDescending(entry => entry.Decrease)
-                                            .Take(10)
-                                            .ToList();
+            var topDecreases = budgetEntries
+                .Where(entry => entry.Budget2024 > 0) // Avoid division by zero
+                .Select(entry => new
+                {
+                    entry.Kategorie,
+                    entry.Unterkategorie,
+                    DecreaseInPercent = entry.Budget2024 == 0 ? 0 : (entry.Budget2023 - entry.Budget2024) / entry.Budget2024 * 100
+                })
+                .OrderByDescending(entry => entry.DecreaseInPercent)
+                .Take(10)
+                .ToList();
             return Ok(topDecreases);
         }
 
