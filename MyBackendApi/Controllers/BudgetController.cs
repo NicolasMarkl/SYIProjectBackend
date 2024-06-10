@@ -135,7 +135,7 @@ namespace MyBackendApi.Controllers
                 {
                     entry.Kategorie,
                     entry.Unterkategorie,
-                    DecreaseInPercent = entry.Budget2024 == 0 ? 0 : (entry.Budget2023 - entry.Budget2024) / entry.Budget2024 * 100
+                    DecreaseInPercent = entry.Budget2024 == 0 ? 0 : (entry.Budget2023 - entry.Budget2024) / entry.Budget2023 * 100
                 })
                 .OrderByDescending(entry => entry.DecreaseInPercent)
                 .Take(10)
