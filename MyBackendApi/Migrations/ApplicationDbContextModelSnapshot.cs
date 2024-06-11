@@ -40,9 +40,6 @@ namespace MyBackendApi.Migrations
                     b.Property<string>("Kategorie")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Konto")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Unterkategorie")
                         .HasColumnType("nvarchar(max)");
 
